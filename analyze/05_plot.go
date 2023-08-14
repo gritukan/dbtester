@@ -32,7 +32,7 @@ var (
 )
 
 func init() {
-	plot.DefaultFont = "Helvetica"
+	//plot.DefaultFont = "Helvetica"
 	plotter.DefaultLineStyle.Width = vg.Points(1.5)
 	plotter.DefaultGlyphStyle.Radius = vg.Points(2.0)
 }
@@ -52,10 +52,7 @@ type triplet struct {
 func (all *allAggregatedData) draw(cfg dbtesterpb.ConfigAnalyzeMachinePlot, pairs ...pair) error {
 	// frame now contains
 	// AVG-LATENCY-MS-etcd-v3.1-go1.7.4, AVG-LATENCY-MS-zookeeper-r3.4.9-java8, AVG-LATENCY-MS-consul-v0.7.2-go1.7.4
-	plt, err := plot.New()
-	if err != nil {
-		return err
-	}
+	plt := plot.New()
 	plt.Title.Text = fmt.Sprintf("%s, %s", all.title, cfg.YAxis)
 	plt.X.Label.Text = cfg.XAxis
 	plt.Y.Label.Text = cfg.YAxis
@@ -81,7 +78,7 @@ func (all *allAggregatedData) draw(cfg dbtesterpb.ConfigAnalyzeMachinePlot, pair
 	plt.Add(ps...)
 
 	for _, outputPath := range cfg.OutputPathList {
-		if err = plt.Save(plotWidth, plotHeight, outputPath); err != nil {
+		if err := plt.Save(plotWidth, plotHeight, outputPath); err != nil {
 			return err
 		}
 	}
@@ -91,10 +88,7 @@ func (all *allAggregatedData) draw(cfg dbtesterpb.ConfigAnalyzeMachinePlot, pair
 func (all *allAggregatedData) drawXY(cfg dbtesterpb.ConfigAnalyzeMachinePlot, pairs ...pair) error {
 	// frame now contains
 	// KEYS-DB-TAG-X, AVG-LATENCY-MS-DB-TAG-Y, ...
-	plt, err := plot.New()
-	if err != nil {
-		return err
-	}
+	plt := plot.New()
 	plt.Title.Text = fmt.Sprintf("%s, %s", all.title, cfg.YAxis)
 	plt.X.Label.Text = cfg.XAxis
 	plt.Y.Label.Text = cfg.YAxis
@@ -120,7 +114,7 @@ func (all *allAggregatedData) drawXY(cfg dbtesterpb.ConfigAnalyzeMachinePlot, pa
 	plt.Add(ps...)
 
 	for _, outputPath := range cfg.OutputPathList {
-		if err = plt.Save(plotWidth, plotHeight, outputPath); err != nil {
+		if err := plt.Save(plotWidth, plotHeight, outputPath); err != nil {
 			return err
 		}
 	}
@@ -130,10 +124,7 @@ func (all *allAggregatedData) drawXY(cfg dbtesterpb.ConfigAnalyzeMachinePlot, pa
 func (all *allAggregatedData) drawXYWithErrorPoints(cfg dbtesterpb.ConfigAnalyzeMachinePlot, triplets ...triplet) error {
 	// frame now contains
 	// KEYS-DB-TAG-X, MIN-LATENCY-MS-DB-TAG-Y, AVG-LATENCY-MS-DB-TAG-Y, MAX-LATENCY-MS-DB-TAG-Y, ...
-	plt, err := plot.New()
-	if err != nil {
-		return err
-	}
+	plt := plot.New()
 	plt.Title.Text = fmt.Sprintf("%s, %s", all.title, cfg.YAxis)
 	plt.X.Label.Text = cfg.XAxis
 	plt.Y.Label.Text = cfg.YAxis
@@ -187,7 +178,7 @@ func (all *allAggregatedData) drawXYWithErrorPoints(cfg dbtesterpb.ConfigAnalyze
 	plt.Add(ps...)
 
 	for _, outputPath := range cfg.OutputPathList {
-		if err = plt.Save(plotWidth, plotHeight, outputPath); err != nil {
+		if err := plt.Save(plotWidth, plotHeight, outputPath); err != nil {
 			return err
 		}
 	}

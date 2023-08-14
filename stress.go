@@ -24,8 +24,9 @@ import (
 
 	"github.com/etcd-io/dbtester/dbtesterpb"
 
-	"github.com/coreos/etcd/clientv3"
-	"github.com/coreos/etcd/pkg/report"
+	"go.etcd.io/etcd/client/v3"
+
+	"github.com/etcd-io/etcd/pkg/report"
 	consulapi "github.com/hashicorp/consul/api"
 	"go.uber.org/zap"
 	"golang.org/x/net/context"

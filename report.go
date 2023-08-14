@@ -21,7 +21,7 @@ import (
 
 	"github.com/cheggaaa/pb"
 	"github.com/etcd-io/dbtester/dbtesterpb"
-	"github.com/coreos/etcd/pkg/report"
+	"github.com/etcd-io/etcd/pkg/report"
 	"golang.org/x/net/context"
 )
 

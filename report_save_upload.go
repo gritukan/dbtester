@@ -24,7 +24,7 @@ import (
 	"github.com/etcd-io/dbtester/dbtesterpb"
 	"github.com/etcd-io/dbtester/pkg/remotestorage"
 
-	"github.com/coreos/etcd/pkg/report"
+	"github.com/etcd-io/etcd/pkg/report"
 	humanize "github.com/dustin/go-humanize"
 	"github.com/gyuho/dataframe"
 )

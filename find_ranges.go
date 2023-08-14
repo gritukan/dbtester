@@ -18,7 +18,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/coreos/etcd/pkg/report"
+	"github.com/etcd-io/etcd/pkg/report"
 )
 
 // CumulativeKeyNumToAvgLatency wraps the cumulative number of keys

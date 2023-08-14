@@ -24,7 +24,7 @@ import (
 	"github.com/etcd-io/dbtester/pkg/ntp"
 	"go.uber.org/zap"
 
-	"github.com/coreos/etcd/pkg/netutil"
+	"github.com/etcd-io/etcd/pkg/netutil"
 	"github.com/gyuho/linux-inspect/df"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"

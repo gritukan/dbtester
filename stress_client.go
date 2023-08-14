@@ -15,7 +15,8 @@
 package dbtester
 
 import (
-	"github.com/coreos/etcd/clientv3"
+	"go.etcd.io/etcd/client/v3"
+
 	"golang.org/x/net/context"
 )
 
