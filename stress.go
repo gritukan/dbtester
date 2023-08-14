@@ -27,7 +27,6 @@ import (
 	"go.etcd.io/etcd/client/v3"
 
 	"github.com/etcd-io/etcd/pkg/report"
-	consulapi "github.com/hashicorp/consul/api"
 	"go.uber.org/zap"
 	"golang.org/x/net/context"
 	"golang.org/x/time/rate"
@@ -239,7 +238,8 @@ func (cfg *Config) Stress(databaseID string) error {
 			var err error
 			for i := 0; i < 7; i++ {
 				clients := mustCreateConnsConsul(gcfg.DatabaseEndpoints, gcfg.ConfigClientMachineBenchmarkOptions.ConnectionNumber)
-				_, err = clients[0].Put(&consulapi.KVPair{Key: key, Value: vals.bytes[0]}, nil)
+				writer := newPutConsul(clients[0])
+				err = writer(context.Background(), &request{consulOp: consulOp{key: key, value: vals.bytes[0]}})
 				if err != nil {
 					continue
 				}
@@ -280,7 +280,8 @@ func (cfg *Config) Stress(databaseID string) error {
 
 		case "consul__v1_0_2", "cetcd__beta":
 			clients := mustCreateConnsConsul(gcfg.DatabaseEndpoints, 1)
-			_, err = clients[0].Put(&consulapi.KVPair{Key: key, Value: vals.bytes[0]}, nil)
+			writer := newPutConsul(clients[0])
+			err = writer(context.Background(), &request{consulOp: consulOp{key: key, value: vals.bytes[0]}})
 
 		default:
 			panic(fmt.Sprintf("%q is unknown database ID", gcfg.DatabaseID))

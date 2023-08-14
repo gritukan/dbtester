@@ -15,9 +15,12 @@
 package dbtester
 
 import (
-	consulapi "github.com/hashicorp/consul/api"
 	"go.uber.org/zap"
+	"go.ytsaurus.tech/yt/go/ypath"
+	"go.ytsaurus.tech/yt/go/yt/ytrpc"
 	"golang.org/x/net/context"
+
+	"go.ytsaurus.tech/yt/go/yt"
 )
 
 type consulOp struct {
@@ -26,44 +29,34 @@ type consulOp struct {
 	staleRead bool
 }
 
-func mustCreateConnsConsul(endpoints []string, total int64) []*consulapi.KV {
-	css := make([]*consulapi.KV, total)
+func mustCreateConnsConsul(endpoints []string, total int64) []*yt.Client {
+	css := make([]*yt.Client, total)
 	for i := range css {
-		endpoint := endpoints[dialTotal%len(endpoints)]
-		dialTotal++
-
-		dcfg := consulapi.DefaultConfig()
-		dcfg.Address = endpoint // x.x.x.x:8500
-		cli, err := consulapi.NewClient(dcfg)
+		c, err := ytrpc.NewClient(&yt.Config{
+			RPCProxy:              "46.243.144.15:9013",
+			DisableProxyDiscovery: true,
+			Token:                 "password",
+		})
 		if err != nil {
 			panic(err)
 		}
-
-		css[i] = cli.KV()
+		css[i] = &c
 	}
 	return css
 }
 
-func newPutConsul(conn *consulapi.KV) ReqHandler {
+func newPutConsul(conn *yt.Client) ReqHandler {
 	return func(ctx context.Context, req *request) error {
 		op := req.consulOp
-		_, err := conn.Put(&consulapi.KVPair{Key: op.key, Value: op.value}, nil)
+		err := (*conn).SetNode(ctx, ypath.Path("//tmp/@"+op.key), op.value, nil)
 		return err
 	}
 }
 
-func newGetConsul(conn *consulapi.KV) ReqHandler {
+func newGetConsul(conn *yt.Client) ReqHandler {
 	return func(ctx context.Context, req *request) error {
-		opt := &consulapi.QueryOptions{}
-		if req.consulOp.staleRead {
-			opt.AllowStale = true
-			opt.RequireConsistent = false
-		}
-		if !req.consulOp.staleRead {
-			opt.AllowStale = false
-			opt.RequireConsistent = true
-		}
-		_, _, err := conn.Get(req.consulOp.key, opt)
+		var value any
+		err := (*conn).GetNode(ctx, ypath.Path("//tmp/@"+req.consulOp.key), &value, nil)
 		return err
 	}
 }

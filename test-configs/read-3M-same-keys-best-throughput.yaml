@@ -17,7 +17,7 @@ test_description: |
 # common control options for all client machines
 config_client_machine_initial:
   # if not empty, all test data paths are prefixed
-  path_prefix: /home/gyuho
+  path_prefix: /home/gritukan/res
   log_path: client-control.log
   client_system_metrics_path: client-system-metrics.csv
   client_system_metrics_interpolated_path: client-system-metrics-interpolated.csv
@@ -29,11 +29,11 @@ config_client_machine_initial:
   server_disk_space_usage_summary_path: server-disk-space-usage-summary.csv
 
   # (optional) to automatically upload all files in client machine
-  google_cloud_project_name: etcd-development
+  #google_cloud_project_name: etcd-development
   # set this in 'control' machine, to automate log uploading in remote 'agent' machines
-  google_cloud_storage_key_path: /etc/gcp-key-etcd-development.json
-  google_cloud_storage_bucket_name: dbtester-results
-  google_cloud_storage_sub_directory: 2018Q1-01-etcd/read-3M-same-keys-best-throughput
+  #google_cloud_storage_key_path: /etc/gcp-key-etcd-development.json
+  #google_cloud_storage_bucket_name: dbtester-results
+  #google_cloud_storage_sub_directory: 2018Q1-01-etcd/read-3M-same-keys-best-throughput
 
 all_database_id_list: [etcd__v3_2, etcd__v3_3, zookeeper__r3_5_3_beta, consul__v1_0_2]
 
@@ -191,7 +191,7 @@ datatbase_id_to_config_client_machine_agent_control:
 
     benchmark_options:
       type: read
-      request_number: 3000000
+      request_number: 5000
       connection_number: 500 # for best throughput
       client_number: 500 # for best throughput
       # if specified, overwrite 'connection_number', 'connection_number'
@@ -208,9 +208,9 @@ datatbase_id_to_config_client_machine_agent_control:
       stale_read: false
 
     benchmark_steps:
-      step1_start_database: true
+            #step1_start_database: true
       step2_stress_database: true
-      step3_stop_database: true
+      #step3_stop_database: true
       step4_upload_logs: true
 
 
