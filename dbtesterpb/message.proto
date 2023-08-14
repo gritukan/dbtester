@@ -10,6 +10,7 @@ import "dbtesterpb/flag_zookeeper.proto";
 import "dbtesterpb/flag_consul.proto";
 import "dbtesterpb/flag_zetcd.proto";
 import "dbtesterpb/flag_cetcd.proto";
+import "dbtesterpb/flag_ytsaurus.proto";
 
 import "dbtesterpb/config_client_machine.proto";
 
@@ -56,6 +57,8 @@ message Request {
 
   flag__cetcd__beta flag__cetcd__beta = 400;
   flag__zetcd__beta flag__zetcd__beta = 500;
+
+  flag__ytsaurus__cypress flag__ytsaurus__cypress = 600;
 }
 
 message Response {

@@ -29,4 +29,7 @@ enum DatabaseID {
 
   // https://github.com/coreos/cetcd/releases
   cetcd__beta = 400;
+
+  // https://github.com/YTsaurus/YTsaurus
+  ytsaurus_cypress = 500;
 }

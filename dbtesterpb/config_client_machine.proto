@@ -85,6 +85,8 @@ message ConfigClientMachineAgentControl {
   flag__cetcd__beta flag__cetcd__beta = 400 [(gogoproto.moretags) = "yaml:\"cetcd__beta\""];
   flag__zetcd__beta flag__zetcd__beta = 500 [(gogoproto.moretags) = "yaml:\"zetcd__beta\""];
 
+  flag__ytsaurus__cypress flag__ytsaurus__cypress = 600 [(gogoproto.moretags) = "yaml:\"ytsaurus_cypress\""];
+
   ConfigClientMachineBenchmarkOptions ConfigClientMachineBenchmarkOptions = 1000 [(gogoproto.moretags) = "yaml:\"benchmark_options\""];
   ConfigClientMachineBenchmarkSteps ConfigClientMachineBenchmarkSteps = 1001 [(gogoproto.moretags) = "yaml:\"benchmark_steps\""];
 }
