@@ -64,9 +64,9 @@ COMMENT
 rm -rf $HOME/zookeeper
 rm -rf $HOME/zookeeper-tmp
 rm -f $HOME/zookeeper-tmp.zip
-curl -sf -o $HOME/zookeeper-tmp.zip https://storage.googleapis.com/dbtester-results/zookeeper-3.5.3-beta.zip
+curl -sf -o $HOME/zookeeper-tmp.zip https://www.apache.org/dyn/closer.lua/zookeeper/zookeeper-3.8.2/apache-zookeeper-3.8.2-bin.tar.gz
 unzip $HOME/zookeeper-tmp.zip -d $HOME/zookeeper-tmp
-mv $HOME/zookeeper-tmp/zookeeper-3.5.3-beta $HOME/zookeeper
+mv $HOME/zookeeper-tmp/apache-zookeeper-3.8.2-beta $HOME/zookeeper
 rm -f $HOME/zookeeper-tmp.zip
 chmod -R 777 $HOME/zookeeper/
 mkdir -p $HOME/zookeeper/zookeeper.data

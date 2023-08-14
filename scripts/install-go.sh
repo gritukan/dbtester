@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-GO_VERSION=1.8.7
+GO_VERSION=1.21.0
 
 sudo rm -f /usr/local/go/bin/go && sudo rm -rf /usr/local/go && sudo rm -f /bin/go
 
-GOOGLE_URL=https://storage.googleapis.com/golang
+GOOGLE_URL=https://go.dev/dl
 DOWNLOAD_URL=${GOOGLE_URL}
 
 sudo curl -s ${DOWNLOAD_URL}/go$GO_VERSION.linux-amd64.tar.gz | sudo tar -v -C /usr/local/ -xz

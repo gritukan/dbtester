@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-GIT_PATH=github.com/coreos/etcd
+GIT_PATH=github.com/etcd-io/etcd
 
-USER_NAME=coreos
-BRANCH_NAME=release-3.2
+USER_NAME=etcd-io
+#BRANCH_NAME=release-3.2
 BRANCH_NAME=release-3.3
-BRANCH_NAME=master
+#BRANCH_NAME=master
 
 <<COMMENT
 USER_NAME=gyuho
